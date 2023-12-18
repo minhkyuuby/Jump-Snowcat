@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 299897635}
   - component: {fileID: 299897634}
   - component: {fileID: 299897636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: base (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 671067287}
   - component: {fileID: 671067286}
   - component: {fileID: 671067288}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: base (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -613,7 +613,7 @@ GameObject:
   - component: {fileID: 983265990}
   - component: {fileID: 983265989}
   - component: {fileID: 983265991}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2086749878}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1093904311
@@ -903,6 +904,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 347f87dd8fc0faa46a8631c092f17563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  walkSpeed: 5
+  isGrounded: 0
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheck: {fileID: 2086749878}
+--- !u!1 &2086749877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2086749878}
+  m_Layer: 0
+  m_Name: groundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2086749878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086749877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1093904310}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

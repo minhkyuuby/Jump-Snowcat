@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     public LayerMask groundMask;
 
+    public Transform groundCheck;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,16 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        moveInput = Input.GetAxisRaw("Horizontal");
+
+        rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.3f, groundMask);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(groundCheck.position, 0.3f);
     }
 }
