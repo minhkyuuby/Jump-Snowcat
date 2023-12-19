@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     public Transform groundCheck;
 
+    public PhysicMaterial bounceMat, normalMat;
     public bool canJump = true;
     public float jumpValue = 0f;
 
@@ -32,7 +33,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
         }
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.3f, groundMask);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundMask);
         
         if (Input.GetKeyDown("space") && isGrounded && canJump)
         {
@@ -41,10 +42,10 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey("space") && isGrounded && canJump)
         {
-            jumpValue += 0.1f;
+            jumpValue += 0.25f;
         }
 
-        if(jumpValue > 20f && isGrounded)
+        if(jumpValue > 25f && isGrounded)
         {
             float tmpx = moveInput * walkSpeed;
             float tmpy = jumpValue;
@@ -72,6 +73,6 @@ public class Player : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawSphere(groundCheck.position, 0.3f);
+        Gizmos.DrawSphere(groundCheck.position, 0.1f);
     }
 }
