@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
 
     public Transform groundCheck;
 
+    public bool canJump = true;
+    public float jumpValue = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +27,46 @@ public class Player : MonoBehaviour
     {
         moveInput = Input.GetAxisRaw("Horizontal");
 
-        rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+        if(jumpValue == 0.0 && isGrounded )
+        {
+            rb.velocity = new Vector2(moveInput * walkSpeed, rb.velocity.y);
+        }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.3f, groundMask);
+        
+        if (Input.GetKeyDown("space") && isGrounded && canJump)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+        if (Input.GetKey("space") && isGrounded && canJump)
+        {
+            jumpValue += 0.1f;
+        }
+
+        if(jumpValue > 20f && isGrounded)
+        {
+            float tmpx = moveInput * walkSpeed;
+            float tmpy = jumpValue;
+            rb.velocity = new Vector2(tmpx, tmpy);
+            Invoke("ResetJump", 0.1f);
+        }
+
+        if (Input.GetKeyUp("space"))
+        {
+            if(isGrounded)
+            {
+                rb.velocity = new Vector2(moveInput * walkSpeed, jumpValue);
+                jumpValue = 0f;
+            }
+            canJump = true;
+        }
+    }
+
+    void ResetJump()
+    {
+        canJump = false;
+        jumpValue = 0f;
     }
 
     private void OnDrawGizmosSelected()
