@@ -8,6 +8,10 @@ public class Player : MonoBehaviour
     private float moveInput;
     public bool isGrounded;
 
+    [SerializeField] private float maxJumpvalue = 30f;
+    [SerializeField] private float JValueUpSpeed = 0.2f;
+    [SerializeField] private float XJumpValueScale = 2f;
+
     private Rigidbody2D rb;
     public LayerMask groundMask;
 
@@ -42,13 +46,13 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey("space") && isGrounded && canJump)
         {
-            jumpValue += 0.25f;
+            jumpValue += JValueUpSpeed;
         }
 
-        if(jumpValue > 25f && isGrounded)
+        if(jumpValue >= maxJumpvalue && isGrounded)
         {
-            float tmpx = moveInput * walkSpeed;
-            float tmpy = jumpValue;
+            float tmpx = moveInput * walkSpeed * XJumpValueScale;
+            float tmpy = maxJumpvalue;
             rb.velocity = new Vector2(tmpx, tmpy);
             Invoke("ResetJump", 0.1f);
         }
@@ -57,7 +61,7 @@ public class Player : MonoBehaviour
         {
             if(isGrounded)
             {
-                rb.velocity = new Vector2(moveInput * walkSpeed, jumpValue);
+                rb.velocity = new Vector2(moveInput * walkSpeed * XJumpValueScale, jumpValue);
                 jumpValue = 0f;
             }
             canJump = true;
